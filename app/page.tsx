@@ -1,7 +1,7 @@
 import { works } from "@/data/works";
-import Link from "next/link";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
+import { WorksGrid } from "@/components/preview/works-grid";
 
 const techStack = [
   { name: "Next.js", desc: "App Router · SSG" },
@@ -40,9 +40,11 @@ export default function HomePage() {
             {techStack.map((tech) => (
               <div
                 key={tech.name}
-                className="rounded-lg border border-border-subtle bg-bg-elevated px-5 py-4"
+                className="group rounded-lg border border-border-subtle bg-bg-elevated px-5 py-4 transition-all hover:border-accent-gold/30"
               >
-                <p className="font-semibold text-text-primary">{tech.name}</p>
+                <p className="font-semibold text-text-primary group-hover:text-accent-amber transition-colors">
+                  {tech.name}
+                </p>
                 <p className="mt-1 text-xs text-text-tertiary">{tech.desc}</p>
               </div>
             ))}
@@ -51,67 +53,7 @@ export default function HomePage() {
       </section>
 
       {/* Works Grid */}
-      <section className="px-6 py-16">
-        <div className="mx-auto max-w-7xl">
-          <div className="mb-8 flex items-center justify-between">
-            <h2 className="text-sm font-medium uppercase tracking-wide text-text-tertiary">
-              全部素材 ({works.length})
-            </h2>
-          </div>
-
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {works.map((work) => (
-              <Link
-                key={work.id}
-                href={`/works/${work.slug}`}
-                className="group block overflow-hidden rounded-xl border border-border-subtle bg-bg-elevated transition-all duration-fast hover:-translate-y-1 hover:border-accent-gold/40 hover:shadow-lg"
-              >
-                {/* Thumbnail */}
-                <div className="relative aspect-[16/10] overflow-hidden bg-bg-base">
-                  <img
-                    src={work.preview.thumbnail}
-                    alt={work.title}
-                    className="h-full w-full object-cover transition-transform duration-slow group-hover:scale-105"
-                    loading="lazy"
-                  />
-                </div>
-
-                {/* Card Content */}
-                <div className="p-5">
-                  <div className="mb-3 flex flex-wrap gap-2">
-                    {work.category.map((cat) => (
-                      <span
-                        key={cat}
-                        className="rounded-full border border-border-subtle px-2.5 py-0.5 text-[11px] uppercase tracking-wider text-text-tertiary"
-                      >
-                        {cat}
-                      </span>
-                    ))}
-                  </div>
-                  <h3 className="text-lg font-semibold text-text-primary group-hover:text-accent-amber transition-colors">
-                    {work.title}
-                  </h3>
-                  <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-text-secondary">
-                    {work.description}
-                  </p>
-                  {work.features && (
-                    <div className="mt-4 flex flex-wrap gap-2">
-                      {work.features.map((feature) => (
-                        <span
-                          key={feature}
-                          className="text-[11px] text-text-tertiary"
-                        >
-                          #{feature}
-                        </span>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
+      <WorksGrid works={works} />
 
       <Footer />
     </main>
