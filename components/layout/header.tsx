@@ -27,9 +27,9 @@ export function Header({ backLink, backLabel }: HeaderProps) {
             <Link href="/" className="hover:text-text-primary transition-colors">
               Works
             </Link>
-            <span className="hover:text-text-primary transition-colors cursor-pointer opacity-50">
+            <Link href="/about" className="hover:text-text-primary transition-colors">
               About
-            </span>
+            </Link>
           </nav>
         )}
       </div>
