@@ -6,6 +6,7 @@ import { Footer } from "@/components/layout/footer";
 import { FadeIn } from "@/components/ui/fade-in";
 import { Tooltip } from "@/components/ui/tooltip";
 import { CopyButton } from "@/components/ui/copy-button";
+import { ShareButton } from "@/components/ui/share-button";
 import { RelatedWorks } from "@/components/preview/related-works";
 import { works as allWorks } from "@/data/works";
 
@@ -144,7 +145,7 @@ export default async function WorkPage({ params }: Props) {
               <div>
                 <dt className="text-text-tertiary">路径</dt>
                 <dd className="mt-1 flex items-center gap-2 font-mono text-xs text-text-secondary">
-                  registry/{work.id}-{work.slug}/
+                  registry/{work.id}-{work.slug}/<ShareButton title={work.title} />
                   <CopyButton text={`registry/${work.id}-${work.slug}/`} />
                 </dd>
               </div>
