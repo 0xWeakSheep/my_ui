@@ -12,6 +12,7 @@ interface WorksGridProps {
 
 export function WorksGrid({ works }: WorksGridProps) {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const allCategories = useMemo(() => {
     const set = new Set<string>();
@@ -20,28 +21,84 @@ export function WorksGrid({ works }: WorksGridProps) {
   }, [works]);
 
   const filteredWorks = useMemo(() => {
-    if (!activeCategory) return works;
-    return works.filter((work) => work.category.includes(activeCategory));
-  }, [works, activeCategory]);
+    let result = works;
+
+    // 分类筛选
+    if (activeCategory) {
+      result = result.filter((work) => work.category.includes(activeCategory));
+    }
+
+    // 关键词搜索
+    if (searchQuery.trim()) {
+      const query = searchQuery.toLowerCase().trim();
+      result = result.filter(
+        (work) =>
+          work.title.toLowerCase().includes(query) ||
+          work.description.toLowerCase().includes(query) ||
+          work.category.some((c) => c.toLowerCase().includes(query)) ||
+          work.features?.some((f) => f.toLowerCase().includes(query))
+      );
+    }
+
+    return result;
+  }, [works, activeCategory, searchQuery]);
 
   return (
     <section className="px-6 py-16">
       <div className="mx-auto max-w-7xl">
-        <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <h2 className="text-sm font-medium uppercase tracking-wide text-text-tertiary">
-            全部素材 ({works.length})
-          </h2>
-          <CategoryFilter
-            categories={allCategories}
-            activeCategory={activeCategory}
-            onCategoryChange={setActiveCategory}
-            totalCount={works.length}
-            filteredCount={filteredWorks.length}
-          />
+        {/* Search + Filter Bar */}
+        <div className="mb-8 flex flex-col gap-4">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <h2 className="text-sm font-medium uppercase tracking-wide text-text-tertiary">
+              全部素材 ({filteredWorks.length})
+            </h2>
+            <CategoryFilter
+              categories={allCategories}
+              activeCategory={activeCategory}
+              onCategoryChange={setActiveCategory}
+              totalCount={works.length}
+              filteredCount={filteredWorks.length}
+            />
+          </div>
+
+          {/* Search Input */}
+          <div className="relative max-w-md">
+            <svg
+              className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-text-tertiary"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={1.5}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+              />
+            </svg>
+            <input
+              type="text"
+              placeholder="搜索素材..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full rounded-lg border border-border-subtle bg-bg-elevated py-2.5 pl-10 pr-4 text-sm text-text-primary placeholder:text-text-tertiary/60 focus:border-accent-gold/40 focus:outline-none transition-colors"
+            />
+            {searchQuery && (
+              <button
+                onClick={() => setSearchQuery("")}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-text-tertiary hover:text-text-primary"
+                aria-label="清除搜索"
+              >
+                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+                </svg>
+              </button>
+            )}
+          </div>
         </div>
 
         {filteredWorks.length === 0 ? (
-          <EmptyState message="该分类下暂无素材" />
+          <EmptyState message={searchQuery ? "未找到匹配的素材" : "该分类下暂无素材"} />
         ) : (
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {filteredWorks.map((work) => (
