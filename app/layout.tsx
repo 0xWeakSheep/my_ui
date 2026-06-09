@@ -5,6 +5,7 @@ import { CustomCursor } from "@/components/ui/custom-cursor";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
 import { BackToTop } from "@/components/ui/back-to-top";
 import { PageLoader } from "@/components/ui/page-loader";
+import { ErrorBoundary } from "@/components/ui/error-boundary";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -48,11 +49,13 @@ export default function RootLayout({
   return (
     <html lang="zh-CN" className={`${inter.variable} ${jetbrainsMono.variable}`}>
       <body className="min-h-screen bg-bg-base text-text-primary antialiased">
-        <PageLoader />
-        <CustomCursor />
-        <ScrollProgress />
-        {children}
-        <BackToTop />
+        <ErrorBoundary>
+          <PageLoader />
+          <CustomCursor />
+          <ScrollProgress />
+          {children}
+          <BackToTop />
+        </ErrorBoundary>
       </body>
     </html>
   );
