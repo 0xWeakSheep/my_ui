@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { MobileNav } from "./mobile-nav";
 
 interface HeaderProps {
   backLink?: string;
@@ -8,7 +9,7 @@ interface HeaderProps {
 export function Header({ backLink, backLabel }: HeaderProps) {
   return (
     <header className="glass sticky top-0 z-50">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+      <div className="relative mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
         <Link href="/" className="flex items-center gap-3 text-sm font-semibold tracking-wide">
           <span className="inline-flex h-7 w-7 items-center justify-center rounded-full border border-text-secondary/50">
             <span className="h-2 w-2 rounded-full bg-accent-amber" />
@@ -23,14 +24,17 @@ export function Header({ backLink, backLabel }: HeaderProps) {
             ← {backLabel || "返回"}
           </Link>
         ) : (
-          <nav className="hidden gap-8 text-sm text-text-secondary md:flex">
-            <Link href="/" className="hover:text-text-primary transition-colors">
-              Works
-            </Link>
-            <Link href="/about" className="hover:text-text-primary transition-colors">
-              About
-            </Link>
-          </nav>
+          <>
+            <nav className="hidden gap-8 text-sm text-text-secondary md:flex">
+              <Link href="/" className="hover:text-text-primary transition-colors">
+                Works
+              </Link>
+              <Link href="/about" className="hover:text-text-primary transition-colors">
+                About
+              </Link>
+            </nav>
+            <MobileNav />
+          </>
         )}
       </div>
     </header>
