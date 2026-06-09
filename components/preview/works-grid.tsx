@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import Link from "next/link";
 import { WorkMeta } from "@/types/work";
 import { CategoryFilter } from "./category-filter";
@@ -13,6 +13,26 @@ interface WorksGridProps {
 export function WorksGrid({ works }: WorksGridProps) {
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
+  const searchRef = useRef<HTMLInputElement>(null);
+
+  // 键盘快捷键：/ 聚焦搜索框，Escape 清除搜索
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // / 键聚焦搜索框（不在输入框内时）
+      if (e.key === "/" && document.activeElement !== searchRef.current) {
+        e.preventDefault();
+        searchRef.current?.focus();
+      }
+      // Escape 清除搜索（在搜索框内时）
+      if (e.key === "Escape" && document.activeElement === searchRef.current) {
+        setSearchQuery("");
+        searchRef.current?.blur();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   const allCategories = useMemo(() => {
     const set = new Set<string>();
@@ -77,11 +97,12 @@ export function WorksGrid({ works }: WorksGridProps) {
               />
             </svg>
             <input
+              ref={searchRef}
               type="text"
-              placeholder="搜索素材..."
+              placeholder="搜索素材... (按 / 聚焦)"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full rounded-lg border border-border-subtle bg-bg-elevated py-2.5 pl-10 pr-4 text-sm text-text-primary placeholder:text-text-tertiary/60 focus:border-accent-gold/40 focus:outline-none transition-colors"
+              className="w-full rounded-lg border border-border-subtle bg-bg-elevated py-2.5 pl-10 pr-10 text-sm text-text-primary placeholder:text-text-tertiary/60 focus:border-accent-gold/40 focus:outline-none transition-colors"
             />
             {searchQuery && (
               <button
