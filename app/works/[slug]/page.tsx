@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { getWorkBySlug, getAllSlugs } from "@/data/works";
 import Link from "next/link";
+import { IframePreview } from "@/components/preview/iframe-preview";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -110,14 +111,10 @@ export default async function WorkPage({ params }: Props) {
               在新窗口打开 →
             </a>
           </div>
-          <div className="overflow-hidden rounded-xl border border-border-subtle">
-            <iframe
-              src={`/registry/${work.id}-${work.slug}/index.html`}
-              title={`${work.title} preview`}
-              className="aspect-[16/9] w-full"
-              loading="lazy"
-            />
-          </div>
+          <IframePreview
+            src={`/registry/${work.id}-${work.slug}/index.html`}
+            title={`${work.title} preview`}
+          />
         </div>
       </section>
 
