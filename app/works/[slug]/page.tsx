@@ -1,7 +1,8 @@
 import { notFound } from "next/navigation";
 import { getWorkBySlug, getAllSlugs } from "@/data/works";
-import Link from "next/link";
 import { IframePreview } from "@/components/preview/iframe-preview";
+import { Header } from "@/components/layout/header";
+import { Footer } from "@/components/layout/footer";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -32,23 +33,7 @@ export default async function WorkPage({ params }: Props) {
 
   return (
     <main className="min-h-screen">
-      {/* Header */}
-      <header className="glass sticky top-0 z-50">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-          <Link href="/" className="flex items-center gap-3 text-sm font-semibold tracking-wide">
-            <span className="inline-flex h-7 w-7 items-center justify-center rounded-full border border-text-secondary/50">
-              <span className="h-2 w-2 rounded-full bg-accent-amber" />
-            </span>
-            my_ui
-          </Link>
-          <Link
-            href="/"
-            className="text-sm text-text-secondary hover:text-text-primary transition-colors"
-          >
-            ← 返回首页
-          </Link>
-        </div>
-      </header>
+      <Header backLink="/" backLabel="返回首页" />
 
       {/* Work Info */}
       <section className="px-6 pt-12 pb-8">
@@ -144,13 +129,7 @@ export default async function WorkPage({ params }: Props) {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="border-t border-border-subtle px-6 py-8">
-        <div className="mx-auto flex max-w-7xl items-center justify-between text-xs text-text-tertiary">
-          <span>my_ui — UI Design Portfolio</span>
-          <span>0xWeakSheep</span>
-        </div>
-      </footer>
+      <Footer />
     </main>
   );
 }

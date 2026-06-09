@@ -232,3 +232,8 @@ git push origin main
 | 日期 | 事件 |
 |------|------|
 | 2026-06-10 | 初始化项目，确定技术架构与目录结构 |
+| 2026-06-10 | **迭代 1**：初始化 Next.js + Tailwind + TypeScript 项目骨架；创建首页素材网格、详情页路由、Design Tokens、素材注册表 |
+| 2026-06-10 | **迭代 2**：修复 tokens.css 语法错误；验证构建通过；迁移现有作品到 registry/01-field/；配置静态导出 |
+| 2026-06-10 | **迭代 3**：添加真实预览图；首页卡片使用缩略图；详情页 iframe 嵌入素材 |
+| 2026-06-10 | **迭代 4**：修复静态导出时 registry/ 缺失（build 脚本添加 fs.cpSync）；新增 Skeleton 组件 |
+| 2026-06-10 | **迭代 5**：新增 IframePreview 组件（loading / error / loaded 状态）；详情页替换原生 iframe |

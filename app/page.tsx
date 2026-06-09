@@ -1,24 +1,19 @@
 import { works } from "@/data/works";
 import Link from "next/link";
+import { Header } from "@/components/layout/header";
+import { Footer } from "@/components/layout/footer";
+
+const techStack = [
+  { name: "Next.js", desc: "App Router · SSG" },
+  { name: "React", desc: "v19 · TypeScript" },
+  { name: "Tailwind", desc: "CSS Utility" },
+  { name: "Vercel", desc: "Edge Deploy" },
+];
 
 export default function HomePage() {
   return (
     <main className="min-h-screen">
-      {/* Header */}
-      <header className="glass sticky top-0 z-50">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-          <Link href="/" className="flex items-center gap-3 text-sm font-semibold tracking-wide">
-            <span className="inline-flex h-7 w-7 items-center justify-center rounded-full border border-text-secondary/50">
-              <span className="h-2 w-2 rounded-full bg-accent-amber" />
-            </span>
-            my_ui
-          </Link>
-          <nav className="hidden gap-8 text-sm text-text-secondary md:flex">
-            <span className="hover:text-text-primary transition-colors cursor-pointer">Works</span>
-            <span className="hover:text-text-primary transition-colors cursor-pointer">About</span>
-          </nav>
-        </div>
-      </header>
+      <Header />
 
       {/* Hero */}
       <section className="px-6 pt-16 pb-12 md:pt-24 md:pb-16">
@@ -35,8 +30,28 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Tech Stack */}
+      <section className="border-y border-border-subtle px-6 py-10">
+        <div className="mx-auto max-w-7xl">
+          <p className="mb-6 text-xs font-bold uppercase tracking-widest text-text-tertiary">
+            技术栈
+          </p>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {techStack.map((tech) => (
+              <div
+                key={tech.name}
+                className="rounded-lg border border-border-subtle bg-bg-elevated px-5 py-4"
+              >
+                <p className="font-semibold text-text-primary">{tech.name}</p>
+                <p className="mt-1 text-xs text-text-tertiary">{tech.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Works Grid */}
-      <section className="px-6 pb-24">
+      <section className="px-6 py-16">
         <div className="mx-auto max-w-7xl">
           <div className="mb-8 flex items-center justify-between">
             <h2 className="text-sm font-medium uppercase tracking-wide text-text-tertiary">
@@ -98,13 +113,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="border-t border-border-subtle px-6 py-8">
-        <div className="mx-auto flex max-w-7xl items-center justify-between text-xs text-text-tertiary">
-          <span>my_ui — UI Design Portfolio</span>
-          <span>0xWeakSheep</span>
-        </div>
-      </footer>
+      <Footer />
     </main>
   );
 }
