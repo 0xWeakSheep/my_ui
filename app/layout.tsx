@@ -19,6 +19,23 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "my_ui — UI Design Portfolio",
   description: "个人 UI 设计作品集，可交互的前端演示与素材库。",
+  keywords: ["UI Design", "Portfolio", "Frontend", "React", "Next.js", "Tailwind CSS"],
+  authors: [{ name: "0xWeakSheep" }],
+  openGraph: {
+    title: "my_ui — UI Design Portfolio",
+    description: "个人 UI 设计作品集，可交互的前端演示与素材库。",
+    type: "website",
+    locale: "zh_CN",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "my_ui — UI Design Portfolio",
+    description: "个人 UI 设计作品集，可交互的前端演示与素材库。",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
