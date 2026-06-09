@@ -4,6 +4,7 @@ import { useState, useMemo } from "react";
 import Link from "next/link";
 import { WorkMeta } from "@/types/work";
 import { CategoryFilter } from "./category-filter";
+import { EmptyState } from "@/components/ui/empty-state";
 
 interface WorksGridProps {
   works: WorkMeta[];
@@ -40,22 +41,7 @@ export function WorksGrid({ works }: WorksGridProps) {
         </div>
 
         {filteredWorks.length === 0 ? (
-          <div className="flex flex-col items-center justify-center py-24 text-text-tertiary">
-            <svg
-              className="h-12 w-12 opacity-30"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={1}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
-              />
-            </svg>
-            <p className="mt-4 text-sm">该分类下暂无素材</p>
-          </div>
+          <EmptyState message="该分类下暂无素材" />
         ) : (
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {filteredWorks.map((work) => (
