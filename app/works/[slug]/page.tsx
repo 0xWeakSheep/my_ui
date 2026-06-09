@@ -96,24 +96,27 @@ export default async function WorkPage({ params }: Props) {
 
       {/* Preview Area */}
       <section className="px-6 pb-12">
-        <div className="mx-auto max-w-7xl">
-          <div className="glass-strong flex aspect-[16/9] items-center justify-center rounded-xl">
-            <div className="text-center">
-              <p className="text-lg font-medium text-text-secondary">
-                预览区域
-              </p>
-              <p className="mt-2 text-sm text-text-tertiary">
-                渲染方式后续确定（iframe / 独立页面 / React 组件）
-              </p>
-              <a
-                href={`/registry/${work.id}-${work.slug}/index.html`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-6 inline-block rounded-md border border-border-subtle bg-bg-elevated px-5 py-2.5 text-sm font-medium text-text-primary transition-colors hover:border-accent-gold/60 hover:text-accent-amber"
-              >
-                在新窗口打开独立演示 →
-              </a>
-            </div>
+        <div className="mx-auto max-w-7xl space-y-4">
+          <div className="flex items-center justify-between">
+            <h2 className="text-sm font-medium uppercase tracking-wide text-text-tertiary">
+              实时预览
+            </h2>
+            <a
+              href={`/registry/${work.id}-${work.slug}/index.html`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm text-text-secondary transition-colors hover:text-accent-amber"
+            >
+              在新窗口打开 →
+            </a>
+          </div>
+          <div className="overflow-hidden rounded-xl border border-border-subtle">
+            <iframe
+              src={`/registry/${work.id}-${work.slug}/index.html`}
+              title={`${work.title} preview`}
+              className="aspect-[16/9] w-full"
+              loading="lazy"
+            />
           </div>
         </div>
       </section>
