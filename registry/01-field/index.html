@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cinematic Field Interface</title>
+    <link rel="stylesheet" href="./index.css" />
+  </head>
+  <body>
+    <main class="experience" data-mode="golden">
+      <section class="scene" aria-label="Cinematic field interface">
+        <div class="scene__image" aria-hidden="true"></div>
+        <div class="scene__grade" aria-hidden="true"></div>
+        <div class="cloud-drift" aria-hidden="true"></div>
+        <canvas id="pollenCanvas" aria-hidden="true"></canvas>
+        <div class="light-rake" aria-hidden="true"></div>
+        <div class="fence-layer" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <i></i>
+        </div>
+
+        <header class="topbar">
+          <a class="mark" href="#" aria-label="Field Interface home">
+            <span class="mark__ring"></span>
+            <span>Field Interface</span>
+          </a>
+          <nav class="nav" aria-label="Primary">
+            <a href="#motion">Motion</a>
+            <a href="#archive">Archive</a>
+            <a href="#signals">Signals</a>
+          </nav>
+          <button class="icon-button" type="button" aria-label="Search">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="m21 21-4.4-4.4m2.4-5.1a7.5 7.5 0 1 1-15 0 7.5 7.5 0 0 1 15 0Z" />
+            </svg>
+          </button>
+        </header>
+
+        <div class="hero-copy">
+          <p class="eyebrow">Cinematic nature system</p>
+          <h1>Moving field interface.</h1>
+          <p class="summary">
+            A quiet product surface where atmosphere, motion, and data sit inside
+            the same frame.
+          </p>
+          <div class="actions" aria-label="Hero actions">
+            <button class="primary-action" type="button">Open Study</button>
+            <button class="secondary-action" type="button">View Motion</button>
+          </div>
+        </div>
+
+        <aside class="signal-panel" id="signals" aria-label="Live field signals">
+          <div class="panel-header">
+            <span>Live Signals</span>
+            <strong>18:42</strong>
+          </div>
+          <div class="signal-ring">
+            <div class="ring"></div>
+            <div>
+              <span>Wind</span>
+              <strong id="windValue">12 km/h</strong>
+            </div>
+          </div>
+          <div class="wave-card" aria-hidden="true">
+            <span style="--h: 22%"></span>
+            <span style="--h: 46%"></span>
+            <span style="--h: 31%"></span>
+            <span style="--h: 64%"></span>
+            <span style="--h: 52%"></span>
+            <span style="--h: 78%"></span>
+            <span style="--h: 44%"></span>
+            <span style="--h: 68%"></span>
+          </div>
+          <div class="metrics">
+            <p><span>Grain</span><strong>24%</strong></p>
+            <p><span>Bloom</span><strong>41%</strong></p>
+            <p><span>Depth</span><strong>71%</strong></p>
+          </div>
+        </aside>
+
+        <section class="motion-strip" id="motion" aria-label="Motion controls">
+          <button type="button" class="mode-button is-active" data-mode-button="golden">Golden</button>
+          <button type="button" class="mode-button" data-mode-button="wind">Wind</button>
+          <button type="button" class="mode-button" data-mode-button="dusk">Dusk</button>
+        </section>
+
+        <div class="field-cues" id="archive" aria-hidden="true">
+          <span>Sun rake</span>
+          <span>Pollen drift</span>
+          <span>Fence parallax</span>
+        </div>
+      </section>
+    </main>
+
+    <script src="./index.js"></script>
+  </body>
+</html>
