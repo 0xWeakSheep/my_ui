@@ -237,3 +237,8 @@ git push origin main
 | 2026-06-10 | **迭代 3**：添加真实预览图；首页卡片使用缩略图；详情页 iframe 嵌入素材 |
 | 2026-06-10 | **迭代 4**：修复静态导出时 registry/ 缺失（build 脚本添加 fs.cpSync）；新增 Skeleton 组件 |
 | 2026-06-10 | **迭代 5**：新增 IframePreview 组件（loading / error / loaded 状态）；详情页替换原生 iframe |
+| 2026-06-10 | **迭代 6**：提取共享 Header/Footer 组件；添加技术栈展示区块；更新维护记录 |
+| 2026-06-10 | **迭代 7**：新增 About 页面（项目介绍、技术架构、设计原则）；启用 Header About 导航链接 |
+| 2026-06-10 | **迭代 8**：新增分类筛选功能（CategoryFilter + WorksGrid 客户端组件）；技术栈卡片 hover 优化 |
+| 2026-06-10 | **迭代 9**：安装 Vercel CLI；尝试部署（需登录认证）；新增 FadeIn 滚动动画组件；首页应用动画 |
+| 2026-06-10 | **迭代 10**：About 页面应用 FadeIn 动画；更新维护记录 |
