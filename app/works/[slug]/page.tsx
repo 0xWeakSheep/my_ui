@@ -4,6 +4,7 @@ import { IframePreview } from "@/components/preview/iframe-preview";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { FadeIn } from "@/components/ui/fade-in";
+import { Tooltip } from "@/components/ui/tooltip";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -99,14 +100,16 @@ export default async function WorkPage({ params }: Props) {
               <h2 className="text-sm font-medium uppercase tracking-wide text-text-tertiary">
                 实时预览
               </h2>
-              <a
-                href={`/registry/${work.id}-${work.slug}/index.html`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-sm text-text-secondary transition-colors hover:text-accent-amber"
-              >
-                在新窗口打开 →
-              </a>
+              <Tooltip content="在独立窗口中查看完整演示">
+                <a
+                  href={`/registry/${work.id}-${work.slug}/index.html`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-text-secondary transition-colors hover:text-accent-amber"
+                >
+                  在新窗口打开 →
+                </a>
+              </Tooltip>
             </div>
           </FadeIn>
           <FadeIn delay={100}>
