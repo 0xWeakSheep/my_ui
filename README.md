@@ -8,13 +8,13 @@
 
 ## 在线预览
 
-> 部署地址待添加
+> 部署地址待添加（Vercel）
 
 ---
 
 ## 技术栈
 
-- **框架**: Next.js (App Router)
+- **框架**: Next.js 15 (App Router)
 - **样式**: Tailwind CSS
 - **语言**: TypeScript
 - **部署**: Vercel
@@ -30,7 +30,7 @@ pnpm install
 # 启动开发服务器
 pnpm dev
 
-# 构建
+# 构建（静态导出）
 pnpm build
 ```
 
@@ -40,15 +40,29 @@ pnpm build
 
 ```
 my_ui/
-├── app/            # Next.js 主站
-├── components/     # React 组件
-├── registry/       # 素材库（每个作品独立实现）
-├── data/           # 素材注册表
-├── styles/         # Design Tokens
-└── public/         # 静态资源
+├── app/              # Next.js 主站
+│   ├── page.tsx      # 首页
+│   ├── about/        # About 页面
+│   └── works/        # 素材详情页
+├── components/       # React 组件
+│   ├── ui/           # 基础 UI 组件
+│   ├── preview/      # 预览相关组件
+│   └── layout/       # 布局组件
+├── registry/         # 素材库（每个作品独立实现）
+├── data/             # 素材注册表
+├── styles/           # Design Tokens
+└── public/           # 静态资源
 ```
 
-每个作品放在 `registry/NN-slug/` 下，包含独立的 HTML/CSS/JS，可直接在浏览器中运行。主站通过 iframe 嵌入展示。
+---
+
+## 功能
+
+- **首页**: 素材网格展示 + 分类筛选 + 技术栈介绍
+- **详情页**: 素材信息 + iframe 实时预览（loading/error/loaded 状态）
+- **About**: 项目介绍、技术架构、设计原则
+- **设计系统**: 跨作品共享的 Design Tokens（颜色、字体、间距、动画）
+- **滚动动画**: Intersection Observer 驱动的淡入效果
 
 ---
 
