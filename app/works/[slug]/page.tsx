@@ -6,6 +6,8 @@ import { Footer } from "@/components/layout/footer";
 import { FadeIn } from "@/components/ui/fade-in";
 import { Tooltip } from "@/components/ui/tooltip";
 import { CopyButton } from "@/components/ui/copy-button";
+import { RelatedWorks } from "@/components/preview/related-works";
+import { works as allWorks } from "@/data/works";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -150,6 +152,8 @@ export default async function WorkPage({ params }: Props) {
           </FadeIn>
         </div>
       </section>
+
+      <RelatedWorks currentWork={work} allWorks={allWorks} />
 
       <Footer />
     </main>
