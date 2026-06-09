@@ -5,6 +5,7 @@ import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { FadeIn } from "@/components/ui/fade-in";
 import { Tooltip } from "@/components/ui/tooltip";
+import { CopyButton } from "@/components/ui/copy-button";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -140,8 +141,9 @@ export default async function WorkPage({ params }: Props) {
               </div>
               <div>
                 <dt className="text-text-tertiary">路径</dt>
-                <dd className="mt-1 font-mono text-xs text-text-secondary">
+                <dd className="mt-1 flex items-center gap-2 font-mono text-xs text-text-secondary">
                   registry/{work.id}-{work.slug}/
+                  <CopyButton text={`registry/${work.id}-${work.slug}/`} />
                 </dd>
               </div>
             </dl>
