@@ -2,6 +2,7 @@ import { works } from "@/data/works";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { WorksGrid } from "@/components/preview/works-grid";
+import { RandomWorkButton } from "@/components/preview/random-work-button";
 import { FadeIn } from "@/components/ui/fade-in";
 
 const techStack = [
@@ -33,6 +34,11 @@ export default function HomePage() {
             <p className="mt-6 max-w-lg text-base leading-relaxed text-text-secondary md:text-lg">
               一个可交互的 UI 设计作品集，同时作为可复用的素材与组件库。每个作品都是完整的前端实现。
             </p>
+          </FadeIn>
+          <FadeIn delay={300}>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <RandomWorkButton works={works} />
+            </div>
           </FadeIn>
         </div>
       </section>
