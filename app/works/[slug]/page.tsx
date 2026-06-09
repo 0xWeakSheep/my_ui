@@ -7,6 +7,7 @@ import { FadeIn } from "@/components/ui/fade-in";
 import { Tooltip } from "@/components/ui/tooltip";
 import { CopyButton } from "@/components/ui/copy-button";
 import { ShareButton } from "@/components/ui/share-button";
+import { FullscreenButton } from "@/components/ui/fullscreen-button";
 import { RelatedWorks } from "@/components/preview/related-works";
 import { works as allWorks } from "@/data/works";
 
