@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { WorkMeta } from "@/types/work";
 
 interface RandomWorkButtonProps {
@@ -8,10 +8,12 @@ interface RandomWorkButtonProps {
 }
 
 export function RandomWorkButton({ works }: RandomWorkButtonProps) {
+  const router = useRouter();
+
   const handleRandom = () => {
     if (works.length === 0) return;
     const randomWork = works[Math.floor(Math.random() * works.length)];
-    window.location.href = `/works/${randomWork.slug}/`;
+    router.push(`/works/${randomWork.slug}/`);
   };
 
   if (works.length <= 1) return null;
