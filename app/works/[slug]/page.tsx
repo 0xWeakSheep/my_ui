@@ -40,7 +40,7 @@ export default async function WorkPage({ params }: Props) {
   }
 
   return (
-    <main className="min-h-screen">
+    <main id="main-content" className="min-h-screen">
       <Header backLink="/" backLabel="返回首页" />
 
       {/* Work Info */}

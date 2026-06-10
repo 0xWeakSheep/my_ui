@@ -9,7 +9,7 @@ export const metadata = {
 
 export default function NotFound() {
   return (
-    <main className="min-h-screen">
+    <main id="main-content" className="min-h-screen">
       <Header backLink="/" backLabel="返回首页" />
 
       <section className="flex flex-col items-center justify-center px-6 py-32">

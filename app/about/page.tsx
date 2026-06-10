@@ -10,7 +10,7 @@ export const metadata = {
 
 export default function AboutPage() {
   return (
-    <main className="min-h-screen">
+    <main id="main-content" className="min-h-screen">
       <Header backLink="/" backLabel="返回首页" />
 
       <section className="px-6 pt-16 pb-12 md:pt-24 md:pb-16">
