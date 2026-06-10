@@ -11,6 +11,7 @@ import { FullscreenButton } from "@/components/ui/fullscreen-button";
 import { DownloadButton } from "@/components/ui/download-button";
 import { RelatedWorks } from "@/components/preview/related-works";
 import { works as allWorks } from "@/data/works";
+import Link from "next/link";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -38,6 +39,10 @@ export default async function WorkPage({ params }: Props) {
   if (!work) {
     notFound();
   }
+
+  const currentIndex = allWorks.findIndex((w) => w.slug === slug);
+  const prevWork = currentIndex > 0 ? allWorks[currentIndex - 1] : null;
+  const nextWork = currentIndex < allWorks.length - 1 ? allWorks[currentIndex + 1] : null;
 
   return (
     <main id="main-content" className="min-h-screen">
@@ -159,6 +164,36 @@ export default async function WorkPage({ params }: Props) {
           </FadeIn>
         </div>
       </section>
+
+      {/* Work Navigation */}
+      {(prevWork || nextWork) && (
+        <section className="border-t border-border-subtle px-6 py-8">
+          <div className="mx-auto flex max-w-7xl items-center justify-between">
+            {prevWork ? (
+              <Link
+                href={`/works/${prevWork.slug}/`}
+                className="group flex items-center gap-2 text-sm text-text-secondary transition-colors hover:text-accent-amber"
+              >
+                <span className="transition-transform group-hover:-translate-x-1">←</span>
+                <span>{prevWork.title}</span>
+              </Link>
+            ) : (
+              <span />
+            )}
+            {nextWork ? (
+              <Link
+                href={`/works/${nextWork.slug}/`}
+                className="group flex items-center gap-2 text-sm text-text-secondary transition-colors hover:text-accent-amber"
+              >
+                <span>{nextWork.title}</span>
+                <span className="transition-transform group-hover:translate-x-1">→</span>
+              </Link>
+            ) : (
+              <span />
+            )}
+          </div>
+        </section>
+      )}
 
       <RelatedWorks currentWork={work} allWorks={allWorks} />
 
