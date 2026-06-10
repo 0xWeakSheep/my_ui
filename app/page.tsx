@@ -47,9 +47,9 @@ export default function HomePage() {
       <section className="border-y border-border-subtle px-6 py-10">
         <div className="mx-auto max-w-7xl">
           <FadeIn>
-            <p className="mb-6 text-xs font-bold uppercase tracking-widest text-text-tertiary">
+            <h2 className="mb-6 text-xs font-bold uppercase tracking-widest text-text-tertiary">
               技术栈
-            </p>
+            </h2>
           </FadeIn>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {techStack.map((tech, i) => (
