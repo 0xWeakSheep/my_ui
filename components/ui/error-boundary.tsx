@@ -31,7 +31,7 @@ export class ErrorBoundary extends Component<Props, State> {
       return (
         <div className="flex min-h-screen flex-col items-center justify-center px-6 text-center">
           <p className="mb-4 text-[80px] font-bold leading-none tracking-tighter text-text-tertiary/20 md:text-[120px]">
-            Oops
+            出错了
           </p>
           <h1 className="text-2xl font-bold text-text-primary">
             出现了一些问题
