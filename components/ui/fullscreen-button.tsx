@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 
 interface FullscreenButtonProps {
   targetRef?: React.RefObject<HTMLElement | null>;
@@ -28,13 +28,13 @@ export function FullscreenButton({ targetRef }: FullscreenButtonProps) {
   }, [targetRef]);
 
   // 监听全屏状态变化
-  useState(() => {
+  useEffect(() => {
     const handleChange = () => {
       setIsFullscreen(!!document.fullscreenElement);
     };
     document.addEventListener("fullscreenchange", handleChange);
     return () => document.removeEventListener("fullscreenchange", handleChange);
-  });
+  }, []);
 
   return (
     <button
