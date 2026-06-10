@@ -20,6 +20,7 @@ export function CategoryFilter({
   return (
     <div className="flex flex-wrap items-center gap-3">
       <button
+        aria-pressed={activeCategory === null}
         onClick={() => onCategoryChange(null)}
         className={cn(
           "rounded-full px-4 py-1.5 text-xs font-medium uppercase tracking-wider transition-all",
@@ -33,6 +34,7 @@ export function CategoryFilter({
       {categories.map((cat) => (
         <button
           key={cat}
+          aria-pressed={activeCategory === cat}
           onClick={() => onCategoryChange(cat)}
           className={cn(
             "rounded-full px-4 py-1.5 text-xs font-medium uppercase tracking-wider transition-all",
