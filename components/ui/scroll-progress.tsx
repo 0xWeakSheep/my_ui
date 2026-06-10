@@ -1,16 +1,17 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 
 export function ScrollProgress() {
-  const [progress, setProgress] = useState(0);
+  const barRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
+      if (!barRef.current) return;
       const scrollTop = window.scrollY;
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const scrollPercent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-      setProgress(scrollPercent);
+      const percent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      barRef.current.style.width = `${percent}%`;
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -22,8 +23,9 @@ export function ScrollProgress() {
   return (
     <div className="fixed top-0 left-0 z-[100] h-[2px] w-full bg-transparent">
       <div
-        className="h-full bg-gradient-to-r from-accent-gold to-accent-amber transition-[width] duration-150 ease-out"
-        style={{ width: `${progress}%` }}
+        ref={barRef}
+        className="h-full bg-gradient-to-r from-accent-gold to-accent-amber"
+        style={{ width: "0%" }}
       />
     </div>
   );
