@@ -11,17 +11,18 @@ interface WorksGridProps {
 }
 
 function CardCopyButton({ slug }: { slug: string }) {
-  const [copied, setCopied] = useState(false);
+  const [status, setStatus] = useState<"idle" | "copied" | "error">("idle");
 
   const handleCopy = async (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     try {
       await navigator.clipboard.writeText(`${window.location.origin}/works/${slug}/`);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+      setStatus("copied");
+      setTimeout(() => setStatus("idle"), 2000);
     } catch {
-      // 静默处理
+      setStatus("error");
+      setTimeout(() => setStatus("idle"), 2000);
     }
   };
 
@@ -29,10 +30,12 @@ function CardCopyButton({ slug }: { slug: string }) {
     <button
       onClick={handleCopy}
       className="inline-flex items-center gap-1 rounded-md border border-border-subtle bg-bg-elevated px-2 py-1 text-[11px] text-text-tertiary transition-colors hover:border-accent-gold/40 hover:text-accent-amber"
-      title={copied ? "已复制" : "复制链接"}
+      title={status === "copied" ? "已复制" : status === "error" ? "复制失败" : "复制链接"}
     >
-      {copied ? (
+      {status === "copied" ? (
         <><svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" /></svg>已复制</>
+      ) : status === "error" ? (
+        <><svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" /></svg>失败</>
       ) : (
         <><svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}><path strokeLinecap="round" strokeLinejoin="round" d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244" /></svg>复制</>
       )}
