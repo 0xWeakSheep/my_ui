@@ -148,8 +148,11 @@ export default async function WorkPage({ params }: Props) {
                 <dt className="text-text-tertiary">路径</dt>
                 <dd className="mt-1 flex items-center gap-2 font-mono text-xs text-text-secondary">
                   registry/{work.id}-{work.slug}/
-                  <DownloadButton workId={work.id} workSlug={work.slug} /><ShareButton title={work.title} />
-                  <CopyButton text={`registry/${work.id}-${work.slug}/`} />
+                  <span className="flex items-center gap-2">
+                    <DownloadButton workId={work.id} workSlug={work.slug} />
+                    <ShareButton title={work.title} />
+                    <CopyButton text={`registry/${work.id}-${work.slug}/`} />
+                  </span>
                 </dd>
               </div>
             </dl>
