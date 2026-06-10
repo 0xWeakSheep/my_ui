@@ -13,7 +13,7 @@ const config: Config = {
         "bg-elevated": "#0d1112",
         "text-primary": "#f4efe3",
         "text-secondary": "rgba(244, 239, 227, 0.68)",
-        "text-tertiary": "rgba(244, 239, 227, 0.46)",
+        "text-tertiary": "rgba(244, 239, 227, 0.55)",
         "accent-gold": "#d9a13a",
         "accent-amber": "#f2c46d",
         "accent-sky": "#648899",
