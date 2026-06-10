@@ -48,8 +48,11 @@ export function WorksGrid({ works }: WorksGridProps) {
   // 键盘快捷键：/ 聚焦搜索框，Escape 清除搜索
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      // / 键聚焦搜索框（不在输入框内时）
-      if (e.key === "/" && document.activeElement !== searchRef.current) {
+      // / 键聚焦搜索框（不在任何输入框内时）
+      const isTyping = ["INPUT", "TEXTAREA", "SELECT"].includes(
+        document.activeElement?.tagName || ""
+      );
+      if (e.key === "/" && !isTyping) {
         e.preventDefault();
         searchRef.current?.focus();
       }
