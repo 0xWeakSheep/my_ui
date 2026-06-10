@@ -63,6 +63,7 @@ export function IframePreview({ src, title, className }: IframePreviewProps) {
       <iframe
         src={src}
         title={title}
+        sandbox="allow-scripts allow-same-origin allow-popups"
         className={cn(
           "aspect-[16/9] w-full transition-opacity duration-300",
           status === "loaded" ? "opacity-100" : "opacity-0"
