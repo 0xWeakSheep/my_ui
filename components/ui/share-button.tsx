@@ -8,7 +8,7 @@ interface ShareButtonProps {
 }
 
 export function ShareButton({ title, url }: ShareButtonProps) {
-  const [copied, setCopied] = useState(false);
+  const [status, setStatus] = useState<"idle" | "copied" | "error">("idle");
 
   const handleShare = useCallback(async () => {
     const shareUrl = url || window.location.href;
@@ -30,10 +30,11 @@ export function ShareButton({ title, url }: ShareButtonProps) {
     // 回退：复制链接到剪贴板
     try {
       await navigator.clipboard.writeText(shareUrl);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+      setStatus("copied");
+      setTimeout(() => setStatus("idle"), 2000);
     } catch {
-      // 复制失败时静默处理
+      setStatus("error");
+      setTimeout(() => setStatus("idle"), 2000);
     }
   }, [title, url]);
 
@@ -41,14 +42,21 @@ export function ShareButton({ title, url }: ShareButtonProps) {
     <button
       onClick={handleShare}
       className="inline-flex items-center gap-2 rounded-md border border-border-subtle bg-bg-elevated px-3 py-2 text-sm text-text-secondary transition-colors hover:border-accent-gold/40 hover:text-accent-amber"
-      title={copied ? "链接已复制" : "分享"}
+      title={status === "copied" ? "链接已复制" : status === "error" ? "复制失败" : "分享"}
     >
-      {copied ? (
+      {status === "copied" ? (
         <>
           <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
           </svg>
           已复制
+        </>
+      ) : status === "error" ? (
+        <>
+          <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
+          </svg>
+          失败
         </>
       ) : (
         <>
